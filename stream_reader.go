@@ -29,6 +29,7 @@ type streamReader[T streamable] struct {
 	unmarshaler    utils.Unmarshaler
 
 	httpHeader
+	tee io.ReadCloser
 }
 
 func (stream *streamReader[T]) Recv() (response T, err error) {
@@ -39,6 +40,10 @@ func (stream *streamReader[T]) Recv() (response T, err error) {
 
 	response, err = stream.processLines()
 	return
+}
+
+func (stream *streamReader[T]) Tee() io.ReadCloser {
+	return stream.tee
 }
 
 //nolint:gocognit
@@ -108,6 +113,6 @@ func (stream *streamReader[T]) unmarshalError() (errResp *ErrorResponse) {
 	return
 }
 
-func (stream *streamReader[T]) Close() {
-	stream.response.Body.Close()
+func (stream *streamReader[T]) Close() error {
+	return stream.response.Body.Close()
 }
