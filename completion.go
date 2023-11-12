@@ -167,6 +167,7 @@ type CompletionResponse struct {
 	Choices []CompletionChoice `json:"choices"`
 	Usage   Usage              `json:"usage"`
 
+	SystemFingerprint string `json:"system_fingerprint"`
 	httpHeader
 }
 
