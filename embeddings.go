@@ -238,10 +238,11 @@ func (r EmbeddingRequestTokens) Convert() EmbeddingRequest {
 // for embedding groups of text already converted to tokens.
 func (c *Client) CreateEmbeddings(
 	ctx context.Context,
-	conv EmbeddingRequestConverter,
+	baseReq EmbeddingRequest,
 ) (res EmbeddingResponse, err error) {
-	baseReq := conv.Convert()
-	req, err := c.newRequest(ctx, http.MethodPost, c.fullURL("/embeddings", string(baseReq.Model)), withBody(baseReq))
+	req, err := c.newRequest(ctx, http.MethodPost,
+		c.fullURL("/embeddings", baseReq.Model),
+		withBody(baseReq))
 	if err != nil {
 		return
 	}

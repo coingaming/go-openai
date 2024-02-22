@@ -167,6 +167,8 @@ type CompletionResponse struct {
 	Choices []CompletionChoice `json:"choices"`
 	Usage   Usage              `json:"usage"`
 
+	Stream *CompletionStream `json:"-"`
+
 	SystemFingerprint string `json:"system_fingerprint"`
 	httpHeader
 }
@@ -181,8 +183,9 @@ func (c *Client) CreateCompletion(
 	request CompletionRequest,
 ) (response CompletionResponse, err error) {
 	if request.Stream {
-		err = ErrCompletionStreamNotSupported
-		return
+		resp, err := c.CreateCompletionStream(ctx, request)
+		response.Stream = resp
+		return response, err
 	}
 
 	urlSuffix := "/completions"

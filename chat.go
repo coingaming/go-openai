@@ -316,6 +316,8 @@ type ChatCompletionResponse struct {
 	Usage             Usage                  `json:"usage"`
 	SystemFingerprint string                 `json:"system_fingerprint"`
 
+	Stream *ChatCompletionStream `json:"-"`
+
 	httpHeader
 }
 
@@ -325,8 +327,9 @@ func (c *Client) CreateChatCompletion(
 	request ChatCompletionRequest,
 ) (response ChatCompletionResponse, err error) {
 	if request.Stream {
-		err = ErrChatCompletionStreamNotSupported
-		return
+		resp, err := c.CreateChatCompletionStream(ctx, request)
+		response.Stream = resp
+		return response, err
 	}
 
 	urlSuffix := chatCompletionsSuffix
