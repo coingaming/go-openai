@@ -15,6 +15,7 @@ type Model struct {
 	Permission []Permission `json:"permission"`
 	Root       string       `json:"root"`
 	Parent     string       `json:"parent"`
+	Alias      string       `json:"-"`
 
 	httpHeader
 }

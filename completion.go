@@ -127,6 +127,7 @@ type CompletionRequest struct {
 	MaxTokens        int      `json:"max_tokens,omitempty"`
 	Temperature      float32  `json:"temperature,omitempty"`
 	TopP             float32  `json:"top_p,omitempty"`
+	TopK             int      `json:"top_k,omitempty"`
 	N                int      `json:"n,omitempty"`
 	Stream           bool     `json:"stream,omitempty"`
 	LogProbs         int      `json:"logprobs,omitempty"`
@@ -144,10 +145,10 @@ type CompletionRequest struct {
 
 // CompletionChoice represents one of possible completions.
 type CompletionChoice struct {
-	Text         string        `json:"text"`
-	Index        int           `json:"index"`
-	FinishReason string        `json:"finish_reason"`
-	LogProbs     LogprobResult `json:"logprobs"`
+	Text         string         `json:"text"`
+	Index        int            `json:"index"`
+	FinishReason string         `json:"finish_reason"`
+	LogProbs     *LogprobResult `json:"logprobs,omitempty"`
 }
 
 // LogprobResult represents logprob result of Choice.
