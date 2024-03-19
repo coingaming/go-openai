@@ -24,7 +24,7 @@ type ChatCompletionStreamResponse struct {
 	Object            string                       `json:"object"`
 	Created           int64                        `json:"created"`
 	Model             string                       `json:"model"`
-	SystemFingerprint string                       `json:"system_fingerprint"`
+	SystemFingerprint string                       `json:"system_fingerprint,omitempty"`
 	Choices           []ChatCompletionStreamChoice `json:"choices"`
 	PromptAnnotations []PromptAnnotation           `json:"prompt_annotations,omitempty"`
 }

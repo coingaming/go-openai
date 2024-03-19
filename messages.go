@@ -14,7 +14,7 @@ const (
 type Message struct {
 	ID          string           `json:"id"`
 	Object      string           `json:"object"`
-	CreatedAt   int              `json:"created_at"`
+	CreatedAt   int64            `json:"created_at"`
 	ThreadID    string           `json:"thread_id"`
 	Role        string           `json:"role"`
 	Content     []MessageContent `json:"content"`

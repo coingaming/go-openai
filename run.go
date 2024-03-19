@@ -15,18 +15,18 @@ type Run struct {
 	AssistantID    string             `json:"assistant_id"`
 	Status         RunStatus          `json:"status"`
 	RequiredAction *RunRequiredAction `json:"required_action,omitempty"`
-	LastError      *RunLastError      `json:"last_error,omitempty"`
+	LastError      *RunLastError      `json:"last_error"`
 	ExpiresAt      int64              `json:"expires_at"`
-	StartedAt      *int64             `json:"started_at,omitempty"`
-	CancelledAt    *int64             `json:"cancelled_at,omitempty"`
-	FailedAt       *int64             `json:"failed_at,omitempty"`
-	CompletedAt    *int64             `json:"completed_at,omitempty"`
+	StartedAt      *int64             `json:"started_at"`
+	CancelledAt    *int64             `json:"cancelled_at"`
+	FailedAt       *int64             `json:"failed_at"`
+	CompletedAt    *int64             `json:"completed_at"`
 	Model          string             `json:"model"`
 	Instructions   string             `json:"instructions,omitempty"`
 	Tools          []Tool             `json:"tools"`
 	FileIDS        []string           `json:"file_ids"` //nolint:revive // backwards-compatibility
 	Metadata       map[string]any     `json:"metadata"`
-	Usage          Usage              `json:"usage,omitempty"`
+	Usage          *Usage             `json:"usage"`
 
 	httpHeader
 }

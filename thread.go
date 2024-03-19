@@ -34,10 +34,10 @@ const (
 )
 
 type ThreadMessage struct {
-	Role     ThreadMessageRole `json:"role"`
-	Content  string            `json:"content"`
-	FileIDs  []string          `json:"file_ids,omitempty"`
-	Metadata map[string]any    `json:"metadata,omitempty"`
+	Role     string         `json:"role"`
+	Content  string         `json:"content"`
+	FileIDs  []string       `json:"file_ids,omitempty"`
+	Metadata map[string]any `json:"metadata,omitempty"`
 }
 
 type ThreadDeleteResponse struct {
